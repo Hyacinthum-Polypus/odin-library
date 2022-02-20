@@ -24,6 +24,12 @@ function addBookToLibrary(book)
 
 function displayBooks()
 {
+    for(card in cards)
+    {
+        main.removeChild(cards[0]);
+        cards.shift();
+    }
+
     myLibrary.forEach(book =>
     {
         console.log(book);
