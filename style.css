@@ -7,11 +7,28 @@
     height: 100vh;
 }
 
-.main {
+main {
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
 }
 
 .card {
     background-color: white;
+    width: 400px;
+    box-shadow: 2px 2px 5px grey;
+    padding: 5px 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.card > .title {
+    grid-column: span 2;
+}
+
+.card > .read {
+    grid-column: span 2;
+    padding-top: 20px;
+    border-top: 1px solid grey;
 }

@@ -31,13 +31,16 @@ function displayBooks()
         const pagesHeader = document.createElement('h4');
         const pages = document.createElement('p');
         const read = document.createElement('p');
+        
+        title.classList.add('title');
+        read.classList.add('read');
 
         title.textContent = book.title;
         authorHeader.textContent = 'Author';
         author.textContent = book.author;
         pagesHeader.textContent = 'Number of Pages';
         pages.textContent = book.pages;
-        pages.textContent = book.read ? 'This book has been read' : 'This book has not been read';
+        read.textContent = book.read ? 'This book has been read' : 'This book has not been read';
 
         newCard.appendChild(title);
         newCard.appendChild(authorHeader);
@@ -51,7 +54,7 @@ function displayBooks()
     });
 }
 
-myLibrary.push(new Book("The Hobbit", "J.R.R. Tolkien", 310, false));
+myLibrary.push(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
 
 console.table(myLibrary)
 
