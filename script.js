@@ -12,9 +12,14 @@ function Book(title, author, pages, read)
     this.read = read;
 }
 
-function addBookToLibrary()
+function addBookToLibrary(title, author, pages, read)
 {
+    myLibrary.push(new Book(title, author, pages, read));
+}
 
+function addBookToLibrary(book)
+{
+    myLibrary.push(book);
 }
 
 function displayBooks()
@@ -54,8 +59,6 @@ function displayBooks()
     });
 }
 
-myLibrary.push(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
-
-console.table(myLibrary)
+addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
 
 displayBooks();
