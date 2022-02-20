@@ -1,6 +1,7 @@
 //DOM Elements.
 const main = document.querySelector('main');
 let cards = [];
+const newBookButton = document.getElementById('new-book-button');
 
 let myLibrary = [];
 
@@ -68,3 +69,4 @@ function displayBooks()
 addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
 
 displayBooks();
+
