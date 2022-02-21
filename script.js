@@ -19,6 +19,12 @@ function Book(title, author, pages, read)
     this.read = read;
 }
 
+Book.prototype.toggleRead = function()
+{
+    this.read = !this.read;
+}
+
+
 
 function addBookToLibrary(book)
 {
@@ -40,7 +46,6 @@ function displayBooks()
 {
     for(let i = 0; i < cards.length;)
     {
-        console.log('hello')
         main.removeChild(cards[0]);
         cards.shift();
     }
@@ -56,13 +61,20 @@ function displayBooks()
         const author = document.createElement('p');
         const pagesHeader = document.createElement('h4');
         const pages = document.createElement('p');
+        const readContainer = document.createElement('div');
         const read = document.createElement('p');
+        const readToggleContainer = document.createElement('div');
+        const readToggle = document.createElement('div');
         
         removeButton.classList.add('remove-button');
         title.classList.add('title');
-        read.classList.add('read');
+        readContainer.classList.add('read');
+        readToggleContainer.classList.add('read-toggle-container');
+        readToggle.classList.add('read-toggle');
+        book.read ? readToggle.classList.add('read-checked') : readToggle.classList.add('read-unchecked');
 
         removeButton.addEventListener('click', (e) => removeBook(index));
+        readToggleContainer.addEventListener('click', (e) => { book.toggleRead(); displayBooks();});
 
         removeButton.textContent = 'X';
         title.textContent = book.title;
@@ -78,16 +90,17 @@ function displayBooks()
         newCard.appendChild(author);
         newCard.appendChild(pagesHeader);
         newCard.appendChild(pages);
-        newCard.appendChild(read);
+        newCard.appendChild(readContainer);
+        readContainer.append(read)
+        readContainer.appendChild(readToggleContainer);
+        readToggleContainer.appendChild(readToggle);
 
         main.appendChild(newCard);
         cards.push(newCard);
     });
 }
 
-addBookToLibrary(new Book("The Hobbit 1", "J.R.R. Tolkien", 310, true));
-addBookToLibrary(new Book("The Hobbit 2", "J.R.R. Tolkien", 310, true));
-addBookToLibrary(new Book("The Hobbit 3", "J.R.R. Tolkien", 310, true));
+addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
 
 displayBooks();
 
