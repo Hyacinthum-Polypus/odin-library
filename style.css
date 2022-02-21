@@ -21,10 +21,10 @@ header {
 }
 
 main {
-    padding: 50px 0;
+    padding: 50px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: baseline;;
     gap: 30px;
 }
 
@@ -53,6 +53,12 @@ main {
     padding: 50px;
 }
 
+.interface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .interface > button {
     padding: 10px 20px;
     color: white;
@@ -62,11 +68,22 @@ main {
     margin-bottom: 50px;
     border: none;
     border-style: outset;
+    
 }
 
 .interface > button:active {
     background-color:darkgrey;
     border-style: inset;
+}
+
+form {
+    background-color:beige;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+form > div {
+    margin-bottom: 25px;
 }
 
 form * {

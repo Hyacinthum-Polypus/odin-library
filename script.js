@@ -3,6 +3,11 @@ const main = document.querySelector('main');
 let cards = [];
 const newBookButton = document.getElementById('new-book-button');
 const form = document.querySelector('form');
+const titleInput = document.querySelector('#title');
+const authorInput = document.querySelector('#author');
+const pagesInput = document.querySelector('#pages');
+const readInput = document.querySelector('#read');
+const submitButton = document.querySelector('#submit');
 
 let myLibrary = [];
 
@@ -14,14 +19,15 @@ function Book(title, author, pages, read)
     this.read = read;
 }
 
-function addBookToLibrary(title, author, pages, read)
-{
-    myLibrary.push(new Book(title, author, pages, read));
-}
 
 function addBookToLibrary(book)
 {
     myLibrary.push(book);
+}
+
+function createAndAddBookToLibrary(title, author, pages, read)
+{
+    addBookToLibrary(new Book(title, author, pages, read));
 }
 
 function displayBooks()
@@ -71,9 +77,34 @@ addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
 
 displayBooks();
 
+function clearForm()
+{
+    titleInput['value'] = '';
+    authorInput['value'] = '';
+    pagesInput['value'] = '';
+    readInput.checked = false;    
+}
+
 function toggleBookForm(e)
 {
     form.toggleAttribute('Hidden')
+    clearForm();
+}
+
+function submitForm(e)
+{
+    createAndAddBookToLibrary(
+        titleInput['value'],
+        authorInput['value'],
+        pagesInput['value'],
+        readInput.checked
+    );
+
+    displayBooks();
+    toggleBookForm();
+
+    e.preventDefault();
 }
 
 newBookButton.addEventListener('click', toggleBookForm);
+form.addEventListener('submit', submitForm);
