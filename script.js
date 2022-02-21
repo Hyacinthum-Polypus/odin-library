@@ -30,20 +30,27 @@ function createAndAddBookToLibrary(title, author, pages, read)
     addBookToLibrary(new Book(title, author, pages, read));
 }
 
+function removeBook(index)
+{
+    myLibrary.splice(index, 1);
+    displayBooks();
+}
+
 function displayBooks()
 {
-    for(card in cards)
+    for(let i = 0; i < cards.length;)
     {
+        console.log('hello')
         main.removeChild(cards[0]);
         cards.shift();
     }
 
-    myLibrary.forEach(book =>
+    myLibrary.forEach((book, index) =>
     {
-        console.log(book);
         const newCard = document.createElement('div');
         newCard.classList.add('card');
 
+        const removeButton = document.createElement('button');
         const title = document.createElement('h3');
         const authorHeader = document.createElement('h4');
         const author = document.createElement('p');
@@ -51,9 +58,13 @@ function displayBooks()
         const pages = document.createElement('p');
         const read = document.createElement('p');
         
+        removeButton.classList.add('remove-button');
         title.classList.add('title');
         read.classList.add('read');
 
+        removeButton.addEventListener('click', (e) => removeBook(index));
+
+        removeButton.textContent = 'X';
         title.textContent = book.title;
         authorHeader.textContent = 'Author';
         author.textContent = book.author;
@@ -61,6 +72,7 @@ function displayBooks()
         pages.textContent = book.pages;
         read.textContent = book.read ? 'This book has been read' : 'This book has not been read';
 
+        newCard.appendChild(removeButton);
         newCard.appendChild(title);
         newCard.appendChild(authorHeader);
         newCard.appendChild(author);
@@ -73,7 +85,9 @@ function displayBooks()
     });
 }
 
-addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
+addBookToLibrary(new Book("The Hobbit 1", "J.R.R. Tolkien", 310, true));
+addBookToLibrary(new Book("The Hobbit 2", "J.R.R. Tolkien", 310, true));
+addBookToLibrary(new Book("The Hobbit 3", "J.R.R. Tolkien", 310, true));
 
 displayBooks();
 

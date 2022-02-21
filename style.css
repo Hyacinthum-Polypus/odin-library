@@ -38,6 +38,11 @@ main {
     grid-template-columns: 1fr 1fr;
 }
 
+.card > .remove-button {
+    grid-column: span 2;
+    justify-self: end;
+}
+
 .card > .title {
     grid-column: span 2;
 }
