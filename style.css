@@ -20,11 +20,6 @@ header {
     font-size: 1rem;
 }
 
-.sidebar {
-    background-color:blanchedalmond;
-    padding: 50px;
-}
-
 main {
     padding: 50px 0;
     display: flex;
@@ -53,6 +48,11 @@ main {
     border-top: 1px solid grey;
 }
 
+.sidebar {
+    background-color:blanchedalmond;
+    padding: 50px;
+}
+
 .interface > button {
     padding: 10px 20px;
     color: white;
@@ -67,4 +67,8 @@ main {
 .interface > button:active {
     background-color:darkgrey;
     border-style: inset;
+}
+
+form * {
+    display: block;
 }

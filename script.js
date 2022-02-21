@@ -2,6 +2,7 @@
 const main = document.querySelector('main');
 let cards = [];
 const newBookButton = document.getElementById('new-book-button');
+const form = document.querySelector('form');
 
 let myLibrary = [];
 
@@ -70,3 +71,9 @@ addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
 
 displayBooks();
 
+function toggleBookForm(e)
+{
+    form.toggleAttribute('Hidden')
+}
+
+newBookButton.addEventListener('click', toggleBookForm);
