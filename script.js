@@ -9,8 +9,6 @@ const pagesInput = document.querySelector('#pages');
 const readInput = document.querySelector('#read');
 const submitButton = document.querySelector('#submit');
 
-let myLibrary = [];
-
 class Book 
 {
     constructor(title, author, pages, read)
@@ -27,25 +25,45 @@ class Book
     }
 }
 
-
-
-function addBookToLibrary(book)
+class Library
 {
-    myLibrary.push(book);
+    bookArray = [];
+
+    constructor()
+    {
+
+    }
+
+    get myLibrary()
+    {
+        return this.bookArray;
+    }
+
+    addBookToLibrary(book)
+    {
+        this.myLibrary.push(book);
+    }
+
+    createAndAddBookToLibrary(title, author, pages, read)
+    {
+        this.addBookToLibrary(new Book(title, author, pages, read));
+    }
+
+    removeBook(index)
+    {
+        this.myLibrary.splice(index, 1);
+        displayBooks(this);
+    }
 }
 
-function createAndAddBookToLibrary(title, author, pages, read)
-{
-    addBookToLibrary(new Book(title, author, pages, read));
-}
+let myLibrary = new Library();
+myLibrary.addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
+displayBooks(myLibrary);
+newBookButton.addEventListener('click', toggleBookForm);
+form.addEventListener('submit', (e) => submitForm(e, myLibrary));
 
-function removeBook(index)
-{
-    myLibrary.splice(index, 1);
-    displayBooks();
-}
 
-function displayBooks()
+function displayBooks(library)
 {
     for(let i = 0; i < cards.length;)
     {
@@ -53,7 +71,7 @@ function displayBooks()
         cards.shift();
     }
 
-    myLibrary.forEach((book, index) =>
+    library.myLibrary.forEach((book, index) =>
     {
         const newCard = document.createElement('div');
         newCard.classList.add('card');
@@ -76,8 +94,8 @@ function displayBooks()
         readToggle.classList.add('read-toggle');
         book.read ? readToggle.classList.add('read-checked') : readToggle.classList.add('read-unchecked');
 
-        removeButton.addEventListener('click', (e) => removeBook(index));
-        readToggleContainer.addEventListener('click', (e) => { book.toggleRead(); displayBooks();});
+        removeButton.addEventListener('click', (e) => library.removeBook(index));
+        readToggleContainer.addEventListener('click', (e) => { book.toggleRead(); displayBooks(library);});
 
         removeButton.textContent = 'X';
         title.textContent = book.title;
@@ -103,10 +121,6 @@ function displayBooks()
     });
 }
 
-addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 310, true));
-
-displayBooks();
-
 function clearForm()
 {
     titleInput['value'] = '';
@@ -121,20 +135,19 @@ function toggleBookForm(e)
     clearForm();
 }
 
-function submitForm(e)
+function submitForm(e, library)
 {
-    createAndAddBookToLibrary(
+    library.createAndAddBookToLibrary(
         titleInput['value'],
         authorInput['value'],
         pagesInput['value'],
         readInput.checked
     );
 
-    displayBooks();
+    displayBooks(library);
     toggleBookForm();
 
     e.preventDefault();
 }
 
-newBookButton.addEventListener('click', toggleBookForm);
-form.addEventListener('submit', submitForm);
+
